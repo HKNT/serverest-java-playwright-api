@@ -93,7 +93,7 @@ public class CartTest extends BaseAPITest {
 
 //        validando se produto foi criado com sucesso.
         PlaywrightAssertions.assertThat(respProduct).isOK();
-        Assertions.assertFalse(jsonResponseProduct.get("_id").asString().isEmpty(), "Verificar se o campo '_id' existe");
+        Assertions.assertFalse(jsonResponseProduct.get("_id").asString().isEmpty(), "Verificar se o Campo '_id' Existe");
         Assertions.assertTrue(jsonResponseProduct.get("message").asString().contains("com sucesso"), "Verificar se o cadastro foi bem sucedido");
 
 //      Criando o carrinho
