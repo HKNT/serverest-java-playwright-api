@@ -1,6 +1,4 @@
 target/
-allure-results/
-.allure/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -33,6 +31,29 @@ allure-results/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+# === Compilação e Artefatos do Maven ===
+target/
+*.jar
+*.war
+*.ear
+*.nar
+
+# === Relatórios e Binários do Allure ===
+.allure/
+allure-results/
+allure-report/
+
+# === Playwright e Navegadores ===
+# Ignora downloads locais de navegadores ou traços de execução
+.playwright/
+test-results/
+playwright-log.txt
+
+# === Logs e Arquivos Temporários ===
+*.log
+*.tmp
+*.bak
 
 ### VS Code ###
 .vscode/
