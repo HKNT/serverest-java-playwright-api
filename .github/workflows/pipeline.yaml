@@ -21,7 +21,7 @@ jobs:
       serverest-api:
         image: paulogoncalvesbh/serverest:latest
         ports:
-          -3000:3000
+          - 3000:3000
 
     steps:
       - name: Baixar o código do repositório
