@@ -17,7 +17,7 @@ public class CartClient {
         this.request = request;
     }
 
-    @Step("Consulta carrinho")
+    @Step("Consulta Carrinho")
     public APIResponse getCart(String cartID){
         try{
             APIResponse resp = request.get(endpoint+"/"+cartID);
@@ -30,7 +30,7 @@ public class CartClient {
         }
     }
 
-    @Step("Criar carrinho")
+    @Step("Criar Carrinho")
     public APIResponse registerCart(Map<String, Object> bodyRequest, String token){
         try{
             RequestOptions options = RequestOptions.create()
@@ -48,7 +48,7 @@ public class CartClient {
         }
     }
 
-    @Step("Deleta carrinho")
+    @Step("Deleta Carrinho")
     public APIResponse deleteCart(String cartID, String token){
         try{
             RequestOptions options = RequestOptions.create().setHeader("Authorization", token).setQueryParam("_id", cartID);
@@ -62,7 +62,7 @@ public class CartClient {
         }
     }
 
-    @Step("Fecha carrinho - Conclui compra")
+    @Step("Fecha Carrinho - Conclui Compra")
     public APIResponse closeCart(String cartID, String token){
         try{
             RequestOptions options = RequestOptions.create().setHeader("Authorization", token).setQueryParam("_id", cartID);
