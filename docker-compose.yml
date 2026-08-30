@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  testes_api:
+    # diz para o composer que o dockerfile esta nesta pasta (.)
+    build: .
+    container_name: QA-Test-Run
+    volumes:
+      - ./target:/app/target
