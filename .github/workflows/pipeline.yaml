@@ -7,6 +7,10 @@ on:
   pull_request:
     branches: ["main"]
 
+# Permissão - criar a pagina de report do Allure
+permissions:
+  contents: write
+
 #função - O que a esteira fará
 jobs:
   testes_playwright:
@@ -17,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configurar o Java 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '21'
           distribution: 'temurin'
@@ -26,10 +30,13 @@ jobs:
       - name: Rodar os testes via Maven
         run: mvn clean test
 
-      - name: Salvar a pasta de resultados (Jsons do allure)
+      - name: Gerar site estático Allure
         if: always()
-        uses: actions/upload-artifact@v4
+        run: mvn allure:report
+
+      - name: Publicar site Allure no gitPages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v5
         with:
-          name: resultados-allure
-          path: target/allure-results/
-          retention-days: 7
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          publish_dir: target/site/allure-maven-plugin
