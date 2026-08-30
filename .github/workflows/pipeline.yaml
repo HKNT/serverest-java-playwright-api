@@ -16,6 +16,13 @@ jobs:
   testes_playwright:
     runs-on: ubuntu-latest
 
+# config do docker
+    services:
+      serverest-api:
+        image: paulogoncalvesbh/serverest:latest
+        ports:
+          -3000:3000
+
     steps:
       - name: Baixar o código do repositório
         uses: actions/checkout@v4
@@ -26,6 +33,12 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+
+# apontando os testes para o docker da esteira
+      - name: Rodar os testes via Maven no docker
+        env:
+          BASE_URL: http://localhost:3000
+        run: mvn clean test -Dgroups="smoke"
 
       - name: Rodar os testes via Maven
         run: mvn clean test
