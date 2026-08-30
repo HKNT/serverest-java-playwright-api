@@ -5,10 +5,10 @@ import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.Playwright;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class BaseAPITest {
     protected static APIRequestContext request;
@@ -16,13 +16,16 @@ public class BaseAPITest {
 
     @BeforeAll
     public static void setup(){
+        Dotenv dotenv      = Dotenv.configure().ignoreIfMissing().load();
+        String urlAmbiente = dotenv.get("BASE_URL", "https://serverest.dev");
+
         play = Playwright.create();
         Map<String,String> header = new HashMap<>();
         header.put("Content-Type", "Application/json");
         header.put("Accept", "Application/json");
         request = play.request().newContext(
                 new APIRequest.NewContextOptions()
-                        .setBaseURL("https://serverest.dev")
+                        .setBaseURL(urlAmbiente)
                         .setExtraHTTPHeaders(header)
         );
     }
